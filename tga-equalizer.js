@@ -20,9 +20,9 @@
 
             $(window).on('resize', function(){
 
-                if(navigator.userAgent.match(/Mobile/i)) {
+                if(!PAGE.isMobileDevice()) {
 
-                    TGAEqualizer.resolve();
+                    TGAEqualizer.resolve(); 
 
                 }
 
@@ -75,7 +75,7 @@
 
                     if (_n == column || _i == _th.find(_target).size()) {
 
-                        _row.each(function (ul, index) { 
+                        _row.each(function (ul, index) {
                             $(ul).css('height', _tallest);
                             $(ul).addClass('tga-equalized');
 
