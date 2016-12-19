@@ -54,9 +54,7 @@
 
                 var column  = TGAEqualizer.Ncolumns(this),
                     equName = _th.attr('data-tgaequalizer'),
-                    _target  = $('[data-tgaequalizer-watch="' + equName + '"]');
-
-
+                    _target  = $('[data-tgaequalizer-watch="'+equName+'"]');
 
                 _th.find(_target).each(function (index, element) {
 
@@ -84,6 +82,7 @@
 
                         _row.each(function (ul, index) {
                             $(ul).css('height', _tallest);
+                            $(ul).addClass('tga-equalized');
 
                             if (index == 0) {
 
@@ -104,6 +103,8 @@
                     }
 
                 });
+
+                _th.addClass('init-equalized');
 
             });
         },
