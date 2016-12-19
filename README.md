@@ -1,8 +1,5 @@
 # tga-equalizer-js
 
-
-# Setup
-
 For init the plugin
 
 ``` javascript
