@@ -2,7 +2,7 @@
  * Created by stefano.brambilla on 19/12/2016.
  * version: 1.1
  *
- * Reorganizer plugin
+ * TGAEqualizer plugin
  */
 
 ;(function($) {
@@ -111,7 +111,7 @@
                             tallest = 0;
 
                         }
-                        
+
                     }
 
                 });
