@@ -22,7 +22,7 @@
 
                 if(!PAGE.isMobileDevice()) {
 
-                    TGAEqualizer.resolve(); 
+                    TGAEqualizer.resolve();
 
                 }
 
@@ -41,49 +41,47 @@
         resolve: function () {
 
             var
-                _d = $(document),
-                _th = $('[data-tgaequalizer]'),
-                _n = 0,
-                _i = 0,
-                _tallest = 0,
-                _row = [];
+                d = $(document),
+                th = $('[data-tgaequalizer]'),
+                n = 0,
+                i = 0,
+                tallest = 0,
+                row = [];
 
-            _d.find(_th).each(function () {
+            d.find(th).each(function () {
 
-                var column  = TGAEqualizer.Ncolumns(this),
-                    equName = _th.attr('data-tgaequalizer'),
-                    _target  = $('[data-tgaequalizer-watch="'+equName+'"]');
+                var
+                    nodo    = $(this),
+                    column  = TGAEqualizer.Ncolumns(this),
+                    equName = $(this).attr('data-tgaequalizer'),
+                    target = $('[data-tgaequalizer-watch="'+equName+'"]');
 
-                _th.find(_target).each(function (index, element) {
+                $(this).find(target).each(function (index, element) {
 
-                    if (column == 0) {
-                        column = _th.find(_target).length
-                    }
+                    n++;
+                    i++;
+                    row.push(element);
+                    $(this).css('height', 'auto'); 
 
-                    _n++;
-                    _i++;
-                    _row.push(element);
-                    $(this).css('height', 'auto');
+                    var h = $(this).outerHeight();
 
-                    var _h = $(this).outerHeight();
+                    if (h > tallest) {
 
-                    if (_h > _tallest) {
-
-                        _tallest = _h;
+                       tallest = h;
 
                     }
 
-                    if (_n == column || _i == _th.find(_target).size()) {
+                    if (n == column || i == nodo.find(target).size()) {
 
-                        _row.each(function (ul, index) {
-                            $(ul).css('height', _tallest);
+                        row.each(function (ul, index) {
+                            $(ul).css('height', tallest);
                             $(ul).addClass('tga-equalized');
 
                             if (index == 0) {
 
                                 $(ul).addClass('first');
 
-                            }else if(index + 1 == _row.size()){
+                            }else if(index + 1 == row.size()){
 
                                 $(ul).addClass('last');
 
@@ -91,15 +89,15 @@
 
                         });
 
-                        _n = 0;
-                        _row = [];
-                        _tallest = 0;
+                        n = 0;
+                        row = [];
+                        tallest = 0;
 
                     }
 
                 });
 
-                _th.addClass('init-equalized');
+                nodo.addClass('init-equalized');
 
             });
         },
