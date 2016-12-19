@@ -9,10 +9,19 @@
 
     var TGAEqualizer = {
 
-        init: function () {
+        init: function (threshold, method) {
 
+
+            //method
+            this.methods = {
+
+                isLight: false
+
+            };
+
+            this.getMethod();
             this.setEvents();
-            this.resolve();
+            this.resolve(threshold, method);
 
         },
 
@@ -22,7 +31,7 @@
 
                 if(!PAGE.isMobileDevice()) {
 
-                    TGAEqualizer.resolve();
+                    TGAEqualizer.resolve($(document));
 
                 }
 
@@ -30,7 +39,7 @@
 
             window.addEventListener("orientationchange", function() {
 
-                TGAEqualizer.resolve();
+                TGAEqualizer.resolve($(document));
 
             });
 
@@ -38,17 +47,22 @@
 
         },
 
-        resolve: function () {
-
+        resolve: function (threshold, method) {
+            //general var
             var
-                d = $(document),
-                th = $('[data-tgaequalizer]'),
-                n = 0,
-                i = 0,
+                radice  = [],
+                th      = $('[data-tgaequalizer]'),
+                n       = 0,
+                i       = 0,
                 tallest = 0,
-                row = [];
+                row     = [];
 
-            d.find(th).each(function () {
+
+            threshold.selector == '' ? radice = threshold : radice = threshold.parent();
+
+            TGAEqualizer.getMethod(method);
+
+            radice.find(th).each(function () {
 
                 var
                     nodo    = $(this),
@@ -58,44 +72,51 @@
 
                 $(this).find(target).each(function (index, element) {
 
-                    n++;
-                    i++;
-                    row.push(element);
-                    $(this).css('height', 'auto'); 
+                        i++;
 
-                    var h = $(this).outerHeight();
+                    if( TGAEqualizer.methods.isLight && $(this).hasClass('tga-equalized')) {
+                    }else{
+                        n++;
+                        row.push(element);
+                        $(this).css('height', 'auto');
 
-                    if (h > tallest) {
+                        var h = $(this).outerHeight();
 
-                       tallest = h;
+                        if (h > tallest) {
 
-                    }
+                            tallest = h;
 
-                    if (n == column || i == nodo.find(target).size()) {
+                        }
 
-                        row.each(function (ul, index) {
-                            $(ul).css('height', tallest);
-                            $(ul).addClass('tga-equalized');
+                        if (n == column || i == nodo.find(target).size()) {
 
-                            if (index == 0) {
+                            row.each(function (ul, index) {
+                                $(ul).css('height', tallest);
+                                $(ul).addClass('tga-equalized');
 
-                                $(ul).addClass('first');
+                                if (index == 0) {
 
-                            }else if(index + 1 == row.size()){
+                                    $(ul).addClass('first');
 
-                                $(ul).addClass('last');
+                                } else if (index + 1 == row.size()) {
 
-                            }
+                                    $(ul).addClass('last');
 
-                        });
+                                }
 
-                        n = 0;
-                        row = [];
-                        tallest = 0;
+                            });
 
+                            n = 0;
+                            row = [];
+                            tallest = 0;
+
+                        }
+                        
                     }
 
                 });
+
+                i = 0;
 
                 nodo.addClass('init-equalized');
 
@@ -158,12 +179,22 @@
 
             return column;
 
+        },
+
+        getMethod: function (method) {
+
+            if(method == 'light'){
+
+                TGAEqualizer.methods.isLight = true;
+
+            }
+
         }
 
     };
 
-    $.fn.tgaEqualizer = function () {
-        return TGAEqualizer.init();
+    $.fn.tgaEqualizer = function (method) {
+        return TGAEqualizer.init(this, method) ;
     };
 
 })(jQuery);
