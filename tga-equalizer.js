@@ -48,8 +48,6 @@
                 _tallest = 0,
                 _row = [];
 
-
-
             _d.find(_th).each(function () {
 
                 var column  = TGAEqualizer.Ncolumns(this),
@@ -77,10 +75,7 @@
 
                     if (_n == column || _i == _th.find(_target).size()) {
 
-                        console.log(_row.size());
-                        console.log(_row.length);
-
-                        _row.each(function (ul, index) {
+                        _row.each(function (ul, index) { 
                             $(ul).css('height', _tallest);
                             $(ul).addClass('tga-equalized');
 
