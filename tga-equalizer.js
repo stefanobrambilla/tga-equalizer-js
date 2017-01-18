@@ -136,8 +136,22 @@
                 column = def;
 
             }
+Ncolumns: function (t){
 
-            if(PAGE.isInBreakpoint('xsmall')){
+            var def     = $(t).attr('data-tgaequalizer-col'),
+                large   = $(t).attr('data-tgaequalizer-large'),
+                medium  = $(t).attr('data-tgaequalizer-medium'),
+                small   = $(t).attr('data-tgaequalizer-small'),
+                xsmall  = $(t).attr('data-tgaequalizer-xsmall'),
+                w       = $(window).width();
+
+            if(!large && !medium && !small && !xsmall){
+
+                column = def;
+
+            }
+
+            if(w < 480){
 
                 if(xsmall) {
                     column = xsmall;
@@ -147,7 +161,7 @@
 
             }
 
-            if(PAGE.isInBreakpoint('small')){
+            if(w > 480 && w < 800){
 
                 if(small) {
                     column = small;
@@ -157,7 +171,7 @@
 
             }
 
-            if(PAGE.isInBreakpoint('medium')){
+            if(w > 800 && w < 1200){
 
                 if(medium) {
                     column = medium;
@@ -167,7 +181,7 @@
 
             }
 
-            if(PAGE.isInBreakpoint('large')){
+            if(w > 1200){
 
                 if(large) {
                     column = large;
