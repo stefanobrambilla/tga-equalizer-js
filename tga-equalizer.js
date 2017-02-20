@@ -129,19 +129,6 @@
                 large   = $(t).attr('data-tgaequalizer-large'),
                 medium  = $(t).attr('data-tgaequalizer-medium'),
                 small   = $(t).attr('data-tgaequalizer-small'),
-                xsmall  = $(t).attr('data-tgaequalizer-xsmall');
-
-            if(!large && !medium && !small && !xsmall){
-
-                column = def;
-
-            }
-Ncolumns: function (t){
-
-            var def     = $(t).attr('data-tgaequalizer-col'),
-                large   = $(t).attr('data-tgaequalizer-large'),
-                medium  = $(t).attr('data-tgaequalizer-medium'),
-                small   = $(t).attr('data-tgaequalizer-small'),
                 xsmall  = $(t).attr('data-tgaequalizer-xsmall'),
                 w       = $(window).width();
 
